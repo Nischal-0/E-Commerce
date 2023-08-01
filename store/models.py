@@ -36,7 +36,7 @@ class Customer(models.Model):
    firstname = models.CharField(max_length=100)
    lastname = models.CharField(max_length=100) 
    contact = models.IntegerField()
-   membership=models.CharField(choices=MEMBERSHIP,default='BRONZE_MEMBER',max_length=1)
+   membership=models.CharField(choices=MEMBERSHIP,default=BRONZE_MEMBER,max_length=1)
    
    def __str__(self) -> str:
       return self.firstname
@@ -46,4 +46,35 @@ class Address(models.Model):
    street_name = models.CharField(max_length=100)
    tole_name = models.CharField(max_length=100)
    
+
+class Order(models.Model):
+   PENDING = 'P'
+   SUCCESS = 'S'
+   CANCEL = 'C'
    
+   PAYMENT =[
+      (PENDING,'Pending'),
+      (SUCCESS,'Success'),
+      (CANCEL,'Cancel'),
+   ]
+   order_time=models.DateTimeField(auto_now=True)
+   payment_status=models.CharField(choices=PAYMENT,default=PENDING,max_length=1)
+   customer=models.ForeignKey("Customer",on_delete=models.PROTECT)
+   
+   
+class OrderItem(models.Model):
+   order=models.ForeignKey("Order",on_delete=models.PROTECT)
+   product=models.ForeignKey("Product",on_delete=models.PROTECT)
+   quantity=models.PositiveSmallIntegerField()
+   price=models.FloatField()
+   
+   
+class Cart(models.Model):
+   customer=models.ForeignKey("Customer",on_delete=models.PROTECT)
+
+
+class CartItem(models.Model):
+   cart=models.ForeignKey("Cart",on_delete=models.CASCADE)
+   product=models.ForeignKey("Product",on_delete=models.CASCADE)
+   total_quantity=models.PositiveSmallIntegerField()
+   total_price=models.FloatField()
