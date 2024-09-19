@@ -1,4 +1,5 @@
 **E-Commerce System Using Django**
+
 This is a basic e-commerce system built using Django, a high-level Python web framework. The system includes essential features for managing products, categories, and customer orders. It is designed for educational purposes, focusing on the fundamentals of Django, including models, views, templates, and the admin panel.
 
 **Features**
@@ -19,4 +20,5 @@ This is a basic e-commerce system built using Django, a high-level Python web fr
 - Authentication: Users can register, log in, and manage their accounts.
 
 **Contributing**
+
 Feel free to fork the repository and submit pull requests for any improvements or new features.
